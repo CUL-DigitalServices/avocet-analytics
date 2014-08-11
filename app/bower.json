@@ -1,0 +1,9 @@
+{
+  "name": "avocet-analytics",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "polymer": "~0.3.3",
+    "google-analytics": "GoogleWebComponents/google-analytics"
+  }
+}

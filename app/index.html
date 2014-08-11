@@ -1,0 +1,86 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Avocet analytics</title>
+
+<script src="bower_components/platform/platform.js"></script>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:700,400,300">
+<link rel="stylesheet" href="bower_components/google-analytics/demo.css" shim-shadowdom>
+<link rel="import" href="bower_components/google-signin/google-signin.html">
+<link rel="import" href="bower_components/google-analytics/google-analytics.html">
+
+<script>
+    // Update the charts
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            var charts = document.querySelectorAll('google-analytics-chart');
+            window.setInterval(function() {
+                for (var i = 0; i < charts.length; i += 1) {
+                    charts[i].getData();
+                }
+            }, 600000);
+        });
+    }());
+</script>
+
+<header>
+    <h1>Avocet Analytics</h1>
+    <google-signin
+      clientId="903965968753-397dirm9aq0mgvhi2oif8nnsntmhn9ud.apps.googleusercontent.com"
+      scopes="https://www.googleapis.com/auth/analytics.readonly">
+    </google-signin>
+</header>
+
+<google-analytics-dashboard>
+    <div layout horizontal>
+        <google-analytics-view-selector></google-analytics-view-selector>
+        <google-analytics-date-selector></google-analytics-date-selector>
+    </div>
+
+    <div layout horizontal center-justified>
+        <google-analytics-chart
+          type="area"
+          metrics="ga:pageviews"
+          dimensions="ga:date">
+          <h3>Pageviews</h3>
+        </google-analytics-chart>
+        <google-analytics-chart
+          type="pie"
+          metrics="ga:users"
+          dimensions="ga:userType">
+          <h3>New Users</h3>
+        </google-analytics-chart>
+        <google-analytics-chart
+          type="geo"
+          metrics="ga:users"
+          dimensions="ga:country">
+          <h3>Users by Country</h3>
+        </google-analytics-chart>
+    </div>
+
+    <div layout horizontal center-justified>
+        <google-analytics-chart
+          type="pie"
+          metrics="ga:totalEvents",
+          filters="ga:eventCategory==Buttons",
+          dimensions="ga:eventLabel",
+          sort="-ga:totalEvents">
+          <h3>Clicked buttons</h3>
+        </google-analytics-chart>
+        <google-analytics-chart
+          type="pie"
+          metrics="ga:totalEvents",
+          filters="ga:eventCategory==Files",
+          dimensions="ga:eventAction",
+          sort="-ga:totalEvents">
+          <h3>File selection method</h3>
+        </google-analytics-chart>
+        <google-analytics-chart
+          type="column"
+          metrics="ga:totalEvents",
+          filters="ga:eventAction==Invalidated by",
+          dimensions="ga:eventLabel",
+          sort="-ga:totalEvents">
+          <h3>Form Errors</h3>
+        </google-analytics-chart>
+    </div>
+</google-analytics-dashboard>

@@ -1,0 +1,12 @@
+.DS_STORE
+.project
+.idea
+*.kpf
+*.log
+*.swp
+
+Thumbs.db
+dump.rdb
+
+node_modules/*
+app/bower_components/*
